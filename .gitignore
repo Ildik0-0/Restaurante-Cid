@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+vite.copnfig.ts
+vite.config.js
+tsconfig.json
+tsconfig.*.json
+eslint*
+package-lock.json
+package.json
