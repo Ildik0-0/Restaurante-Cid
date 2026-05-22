@@ -261,7 +261,6 @@
 .sectionInformation_column1 {
     height: 100%;
     width: 50%;
-   
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -343,3 +342,413 @@
    
   }
 }
+
+/*End of sectionInformation 2 -------------*/
+
+/*---------------*/
+.sectionCosinaInformation{
+    background-color: var(--color-yellow);
+    width: min(100%, 1200px);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+     justify-content: center;
+    align-items: center;
+    
+}
+
+.sectionCosinaInformation_columna1{
+    
+    display: flex;
+  align-items: center;
+}
+
+.sectionCosinaInformation_image{
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.sectionCosinaInformation_image--primary{
+    border: 3px solid rgb(246, 244, 244);
+    object-fit: cover;
+    transform: translateY(40%) translateX(10%);
+    position: relative;
+    z-index: 2;
+}
+
+.sectionCosinaInformation_columna2{
+
+    width: 40%;
+    
+    transform: translateX(5%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem 1rem 2rem 2rem;
+}
+
+.sectionCosinaInformation_subTitle{
+    font-family: var(--font-basic);
+   
+    text-transform: uppercase;
+    color: var(--color-primary);
+    letter-spacing: 0.22em;
+}
+
+.sectionCosinaInformation_subTitle p,
+.sectionCosinaInformation_title p,
+.sectionCosinaInformation_content p {
+    margin: 0;
+}
+
+.sectionCosinaInformation_image--secondary{
+  z-index: 1;
+  transform: translateY(-40%) translateX(0%);
+}
+
+.sectionCosinaInformation_title{
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--font-display);
+  color: #1f1a17;
+ 
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+.sectionCosinaInformation_title .italic-p{
+  line-height: 0.95;
+}
+
+.sectionCosinaInformation_content{
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  font-family: var(--font-basic);
+  font-size: clamp(1rem, 1.45vw, 1.35rem);
+  line-height: 1.7;
+  color: var(--color-text-muted);
+      align-items: center;
+  }
+
+  .sectionCosinaInformation_image{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .sectionCosinaInformation_image--primary{
+      border: 3px solid rgb(246, 244, 244);
+      object-fit: cover;
+      transform: translateY(40%) translateX(10%);
+      position: relative;
+      z-index: 2;
+  }
+
+  .sectionCosinaInformation_columna2{
+     
+      width: 40%;
+      height: 100%;
+      transform: translateX(5%) translateY(-15%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1.5rem;
+      
+  }
+
+  
+  
+
+  .sectionCosinaInformation_image--secondary{
+    z-index: 1;
+    transform: translateY(-40%) translateX(0%);
+  }
+
+  .sectionCosinaInformation_subTitle{
+      font-family: var(--font-basic);
+      
+      text-transform: uppercase;
+      color: var(--color-primary);
+      letter-spacing: 0.22em;
+  }
+
+  .sectionCosinaInformation_title{
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-family: var(--font-display);
+    color: #1f1a17;
+    
+    line-height: 0.95;
+    font-weight: 400;
+  }
+
+  .sectionCosinaInformation_title .italic-p{
+    line-height: 0.95;
+  }
+
+  .sectionCosinaInformation_content{
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    font-family: var(--font-basic);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 42rem;
+  }
+
+  .sectionCosinaInformation_button{
+    margin-top: 0.5rem;
+  }
+
+  .sectionCosinaInformation_button--primary{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 24px;
+    min-width: 190px;
+    padding: 0.9rem 2rem;
+    background: #7b8525;
+    border: 0;
+    color: var(--color-bg);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-family: var(--font-basic);
+    
+    font-weight: 400;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    align-self: flex-start;
+  }
+
+  .sectionCosinaInformation_button--primary:hover{
+    background: #68721f;
+    transform: translateY(-1px);
+  }
+
+@media (max-width: 1024px) {
+  .sectionCosinaInformation {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem 1rem;
+  }
+
+  .sectionCosinaInformation_columna1,
+  .sectionCosinaInformation_columna2 {
+    width: 100%;
+    transform: none;
+  }
+
+  .sectionCosinaInformation_columna1 {
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .sectionCosinaInformation_image {
+    align-items: center;
+  }
+
+  .sectionCosinaInformation_image--primary {
+    display: none;
+  }
+
+  .sectionCosinaInformation_image--secondary {
+    transform: translateY(5%) translateX(0);
+  }
+
+  .sectionCosinaInformation_columna2 {
+    height: auto;
+    padding: 1rem 0;
+    gap: 1.25rem;
+  }
+
+  .sectionCosinaInformation_content {
+    max-width: 100%;
+  }
+
+  .sectionCosinaInformation_button--primary {
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sectionCosinaInformation_columna1,
+  .sectionCosinaInformation_columna2 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .sectionCosinaInformation_title {
+    font-size: clamp(2.2rem, 11vw, 3.4rem);
+  }
+
+  .sectionCosinaInformation_content {
+    font-size: 10px;
+    line-height: 1.6;
+    gap: 1.25rem;
+    text-align: justify;
+  }
+
+  .sectionCosinaInformation_subTitle{
+    font-size: 10px;
+  }
+
+  .sectionCosinaInformation_button--primary {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/*----------------END SECTION COSINA INFORMATION--------------------*/
+
+.sectionBeerInformation{
+  background-color: var(--color-black);
+
+  width: min(100%, 1200px);
+  width: 100%;
+  height: 70vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sectionBeerInformation_columna1{
+ 
+  width: 30vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+}
+.sectionBeerInformation_subTitle{
+  font-family: var(--font-basic);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sectionBeerInformation_content{
+  font-family: var(--font-basic);
+  color: var(--color-light-yellow-text);
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.sectionBeerInformation_subContent{
+  
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  transform: translateY(50%);
+}
+
+.sectionBeerInformation_subContent_list{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2.2rem;
+  text-transform: uppercase;
+ 
+}
+.sectionBeerInformation_subContent_item p {
+  font-size: 30px;
+  font-family: var(--font-display);
+}
+
+.sectionBeerInformation_subContent_item span {
+  font-size: 12px;
+  font-family: var(--font-display);
+  justify-content: flex-end ;
+ 
+}
+
+
+
+.sectionBeerInformation_columna2{
+  
+  width: 30vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sectionBeerInformation_image{
+  width: 80%;
+  height: 80%;
+  transform: translateY(0%) translateX(0%);
+}
+
+@media (max-width: 1024px) {
+  .sectionBeerInformation {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem 1rem;
+    height: auto;
+  }
+
+  .sectionBeerInformation_columna1,
+  .sectionBeerInformation_columna2 {
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .sectionBeerInformation_columna2 {
+    order: -1;
+  }
+
+  .sectionBeerInformation_columna1 {
+    justify-content: center;
+    margin-bottom: 1rem;
+    height: 50vh;
+  }
+
+  .sectionBeerInformation_columna2 {
+    align-items: center;
+  }
+
+  .sectionBeerInformation_subContent {
+    width: 100%;
+    transform: translateY(100%);
+    font-size: 10px;
+  }
+
+  .sectionBeerInformation_content {
+    
+    font-size: 12px;
+  }
+  .sectionBeerInformation_subContent_item{
+    span {
+      font-size: 10px;
+    }
+  }
+
+  .sectionBeerInformation_image {
+    width: 100%;
+    height: auto;
+    transform: translateY(5%);
+  }
+}
+
+
