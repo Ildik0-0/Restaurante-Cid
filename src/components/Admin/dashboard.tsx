@@ -13,6 +13,9 @@ type EventItem = {
   price: string;
   image: string;
   description: string;
+  instagram?: string;
+  facebook?: string;
+  youtube?: string;
 };
 
 function parseDate(value: string) {
@@ -58,6 +61,9 @@ export default function AdminDashboard() {
     price: "",
     image: "",
     description: "",
+    instagram: "",
+    facebook: "",
+    youtube: "",
   });
 
   async function loadEvents() {
@@ -164,6 +170,9 @@ export default function AdminDashboard() {
       price: "",
       image: "",
       description: "",
+      instagram: "",
+      facebook: "",
+      youtube: "",
     });
     setEditingDocId(null);
   }
@@ -178,6 +187,9 @@ export default function AdminDashboard() {
       price: event.price,
       image: event.image,
       description: event.description,
+      instagram: event.instagram || "",
+      facebook: event.facebook || "",
+      youtube: event.youtube || "",
     });
     setEditingDocId(event.docId ?? null);
     setFormError("");
@@ -218,6 +230,9 @@ export default function AdminDashboard() {
           price: form.price.trim(),
           image: form.image.trim(),
           description: form.description.trim(),
+          instagram: form.instagram.trim(),
+          facebook: form.facebook.trim(),
+          youtube: form.youtube.trim(),
         });
       } else {
         const nextId = events.reduce((max, event) => Math.max(max, Number(event.id_event ?? 0)), 0) + 1;
@@ -231,6 +246,9 @@ export default function AdminDashboard() {
           price: form.price.trim(),
           image: form.image.trim(),
           description: form.description.trim(),
+          instagram: form.instagram.trim(),
+          facebook: form.facebook.trim(),
+          youtube: form.youtube.trim(),
         });
       }
 
@@ -243,6 +261,10 @@ export default function AdminDashboard() {
       setSaving(false);
     }
   }
+
+  const formLabelClass = "mb-1.5 block text-sm font-semibold text-slate-800";
+  const formInputClass = "block w-full box-border rounded-2xl border border-[#e7dcc5] bg-white px-4 py-3 text-sm text-slate-800 shadow-[inset_0_1px_2px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-[#9d9aa8] focus:border-[#cbb46f] focus:ring-2 focus:ring-[#e8d89f]/45";
+  const formTextareaClass = "block min-h-[108px] w-full box-border rounded-2xl border border-[#e7dcc5] bg-white px-4 py-3 text-sm text-slate-800 shadow-[inset_0_1px_2px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-[#9d9aa8] focus:border-[#cbb46f] focus:ring-2 focus:ring-[#e8d89f]/45";
 
   return (
     <div className="space-y-6">
@@ -284,33 +306,27 @@ export default function AdminDashboard() {
         </div>
 
         {showCreateForm && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4 py-6 backdrop-blur-sm">
-            <form onSubmit={handleCreateEvent} className="w-full max-w-3xl rounded-[28px] border border-[#eadfbe] bg-[#fbf7ef] p-4 shadow-[0_24px_60px_rgba(0,0,0,0.25)] sm:p-6">
-              <div className="flex flex-col gap-3 border-b border-[#f0e7cf] pb-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4 py-4 backdrop-blur-sm">
+            <form onSubmit={handleCreateEvent} className="w-full max-w-[500px] max-h-[88vh] overflow-y-auto rounded-[18px] border border-[#eadfbe] bg-[#fbf7ef] px-4 py-3.5 shadow-[0_20px_48px_rgba(0,0,0,0.22)] sm:px-4 sm:py-4">
+              <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b7b4f]">Crear evento</p>
-                  <h2 className="mt-1 text-xl font-semibold text-slate-900">Nuevo concierto de prueba</h2>
+                  <h2 className="font-serif text-[1.8rem] text-slate-900 sm:text-[1.95rem]">
+                    {editingDocId ? "Editar Concierto" : "Nuevo Concierto"}
+                  </h2>
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowCreateForm(false);
-                      setFormError("");
-                      resetForm();
-                    }}
-                    className="rounded-full border border-[#eadfbe] px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-[#faf4e2]"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={saving}
-                    className="rounded-full bg-[#7f8a2b] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#697324] disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {saving ? "Guardando..." : editingDocId ? "Guardar cambios" : "Guardar evento"}
-                  </button>
-                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowCreateForm(false);
+                    setFormError("");
+                    resetForm();
+                  }}
+                  className="text-[2rem] leading-none text-slate-500 transition hover:text-slate-900"
+                  aria-label="Cerrar formulario"
+                >
+                  ×
+                </button>
               </div>
 
               {formError && (
@@ -319,56 +335,148 @@ export default function AdminDashboard() {
                 </div>
               )}
 
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <input
-                  value={form.title}
-                  onChange={(e) => setForm((current) => ({ ...current, title: e.target.value }))}
-                  placeholder="Título"
-                  className="rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b]"
-                />
-                <input
-                  value={form.genre}
-                  onChange={(e) => setForm((current) => ({ ...current, genre: e.target.value }))}
-                  placeholder="Género"
-                  className="rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b]"
-                />
-                <input
-                  value={form.location}
-                  onChange={(e) => setForm((current) => ({ ...current, location: e.target.value }))}
-                  placeholder="Ubicación"
-                  className="rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b]"
-                />
-                <input
-                  value={form.date}
-                  onChange={(e) => setForm((current) => ({ ...current, date: e.target.value }))}
-                  type="date"
-                  className="rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b]"
-                />
-                <input
-                  value={form.time}
-                  onChange={(e) => setForm((current) => ({ ...current, time: e.target.value }))}
-                  type="time"
-                  className="rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b]"
-                />
-                <input
-                  value={form.price}
-                  onChange={(e) => setForm((current) => ({ ...current, price: e.target.value }))}
-                  placeholder="Precio"
-                  className="rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b]"
-                />
-                <input
-                  value={form.image}
-                  onChange={(e) => setForm((current) => ({ ...current, image: e.target.value }))}
-                  placeholder="URL de imagen"
-                  className="md:col-span-2 rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b]"
-                />
+              <div className="mt-3.5 space-y-3">
+                <label className="block w-full">
+                  <span className={formLabelClass}>Nombre del Artista/Banda *</span>
+                  <input
+                    value={form.title}
+                    onChange={(e) => setForm((current) => ({ ...current, title: e.target.value }))}
+                    className={formInputClass}
+                  />
+                </label>
 
-                <textarea
-                  value={form.description}
-                  onChange={(e) => setForm((current) => ({ ...current, description: e.target.value }))}
-                  placeholder="Descripción"
-                  className="min-h-28 rounded-xl border border-[#eadfbe] px-4 py-3 text-sm outline-none focus:border-[#7f8a2b] md:col-span-2"
-                />
+                <div className="grid gap-3 md:grid-cols-2">
+                  <label className="block">
+                    <span className={formLabelClass}>Fecha *</span>
+                    <input
+                      value={form.date}
+                      onChange={(e) => setForm((current) => ({ ...current, date: e.target.value }))}
+                      type="date"
+                      className={formInputClass}
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className={formLabelClass}>Hora *</span>
+                    <input
+                      value={form.time}
+                      onChange={(e) => setForm((current) => ({ ...current, time: e.target.value }))}
+                      type="time"
+                      className={formInputClass}
+                    />
+                  </label>
+                </div>
+
+                <label className="block w-full">
+                  <span className={formLabelClass}>
+                    Descripción * <span className="font-normal text-[#b4ab95]">(máx. 140 caracteres)</span>
+                  </span>
+                  <textarea
+                    value={form.description}
+                    onChange={(e) => setForm((current) => ({ ...current, description: e.target.value.slice(0, 140) }))}
+                    maxLength={140}
+                    className={formTextareaClass}
+                  />
+                </label>
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  <label className="block w-full">
+                    <span className={formLabelClass}>Estilo Musical *</span>
+                    <input
+                      value={form.genre}
+                      onChange={(e) => setForm((current) => ({ ...current, genre: e.target.value }))}
+                      placeholder="Ej: Rock, Jazz, Flamenco..."
+                      className={formInputClass}
+                    />
+                  </label>
+
+                  <label className="block w-full">
+                    <span className={formLabelClass}>Precio de Entrada *</span>
+                    <input
+                      value={form.price}
+                      onChange={(e) => setForm((current) => ({ ...current, price: e.target.value }))}
+                      placeholder="Ej: Entrada libre, 5 €..."
+                      className={formInputClass}
+                    />
+                  </label>
+                </div>
+
+                <label className="block w-full">
+                  <span className={formLabelClass}>Ubicación *</span>
+                  <input
+                    value={form.location}
+                    onChange={(e) => setForm((current) => ({ ...current, location: e.target.value }))}
+                    placeholder="Ej: Terraza principal, Sala interior..."
+                    className={formInputClass}
+                  />
+                </label>
+
+                <label className="block w-full border-b border-[#eadfbe] pb-4">
+                  <span className={formLabelClass}>URL de la Imagen *</span>
+                  <input
+                    value={form.image}
+                    onChange={(e) => setForm((current) => ({ ...current, image: e.target.value }))}
+                    placeholder="https://..."
+                    className={formInputClass}
+                  />
+                </label>
+
+                <div className="w-full space-y-2 border-b border-[#eadfbe] pb-3.5">
+                  <p className="font-serif text-base text-slate-900">
+                    Redes Sociales <span className="font-sans text-sm font-normal text-[#b4ab95]">(opcional)</span>
+                  </p>
+
+                  <label className="block w-full">
+                    <span className={formLabelClass}>Instagram</span>
+                    <input
+                      value={form.instagram}
+                      onChange={(e) => setForm((current) => ({ ...current, instagram: e.target.value }))}
+                      placeholder="https://instagram.com/..."
+                      className={formInputClass}
+                    />
+                  </label>
+
+                  <label className="block w-full">
+                    <span className={formLabelClass}>Facebook</span>
+                    <input
+                      value={form.facebook}
+                      onChange={(e) => setForm((current) => ({ ...current, facebook: e.target.value }))}
+                      placeholder="https://facebook.com/..."
+                      className={formInputClass}
+                    />
+                  </label>
+
+                  <label className="block w-full">
+                    <span className={formLabelClass}>YouTube</span>
+                    <input
+                      value={form.youtube}
+                      onChange={(e) => setForm((current) => ({ ...current, youtube: e.target.value }))}
+                      placeholder="https://youtube.com/..."
+                      className={formInputClass}
+                    />
+                  </label>
+                </div>
+
+                <div className="flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">
+                  <button
+                    type="submit"
+                    disabled={saving}
+                    className="min-w-[180px] rounded-xl bg-[#7b8926] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#65711f] disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {saving ? "Guardando..." : editingDocId ? "Guardar cambios" : "Crear Concierto"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowCreateForm(false);
+                      setFormError("");
+                      resetForm();
+                    }}
+                    className="rounded-xl border border-[#e6dbc0] bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-[#faf4e2]"
+                  >
+                    Cancelar
+                  </button>
+                </div>
               </div>
             </form>
           </div>

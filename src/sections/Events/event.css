@@ -46,6 +46,12 @@
 .sectionMusicPartyEvents_subtitle{
     text-transform: uppercase;
     font-family: var(--font-basic);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    text-align: left;
+
 }
 
 .sectionMusicPartyEvents_content{
@@ -88,17 +94,158 @@
 /*---------------------Next Events--------------------*/
 
 .sectionNextEvents{
-    border: 1px solid rgb(255, 0, 200);
-    height: 100vh;
-    width: min(100%, 1200px);
     width: 100%;
+    min-height: 100vh;
+    background: var(--color-bg);
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1.5rem 5rem;
 }
 
 .sectionNextEvents_subtitle{
-    
+    display: flex;
+    justify-content: center;
     text-transform: uppercase;
     color: var(--color-black);
-    padding: 1rem;
+    padding: 1rem 0 2rem;
     letter-spacing: 2px;
-    padding-top: 8rem;
+}
+
+.sectionNextEvents_column1{
+    width: min(100%, 1200px);
+}
+
+.sectionNextEvents_empty{
+    margin: 1rem auto 0;
+    max-width: 720px;
+    text-align: center;
+    color: rgba(48, 48, 48, 0.72);
+    font-family: var(--font-basic);
+    font-size: 1rem;
+}
+
+.sectionNextEvents_grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+    gap: 2rem;
+    justify-content: center;
+    align-items: start;
+    margin-top: 1rem;
+}
+
+.sectionNextEvents_card{
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(186, 174, 132, 0.35);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    max-width: 360px;
+}
+
+.sectionNextEvents_cardImage{
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.sectionNextEvents_cardContent{
+    position: relative;
+    background: #fff;
+    padding: 1.2rem 1.35rem 1.35rem;
+    font-family: var(--font-basic);
+    min-height: 245px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionNextEvents_cardPrice{
+    position: absolute;
+    top: -212px;
+    left: 1rem;
+    background: #d2a11b;
+    color: #1f1f1f;
+    min-width: 64px;
+    text-align: center;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.sectionNextEvents_cardGenre{
+    color: #8a8a6b;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    margin-bottom: 0.75rem;
+}
+
+.sectionNextEvents_cardDate{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #87923d;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sectionNextEvents_cardTitle{
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 2.3vw, 2rem);
+    line-height: 1.15;
+    color: #1f1a16;
+    margin-bottom: 0.7rem;
+    min-height: calc(1.15em * 2);
+    line-clamp: 2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sectionNextEvents_cardDescription{
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: rgba(44, 38, 30, 0.82);
+    margin-bottom: 1rem;
+    line-clamp: 3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sectionNextEvents_cardMeta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    color: rgba(158, 150, 122, 0.95);
+    font-size: 0.9rem;
+    padding-top: 0.25rem;
+}
+
+.sectionNextEvents_cardMeta span:last-child{
+    margin-left: auto;
+}
+
+@media (max-width: 768px){
+    .sectionNextEvents{
+        padding-inline: 1rem;
+    }
+
+    .sectionNextEvents_cardImage{
+        height: 220px;
+    }
+
+    .sectionNextEvents_cardContent{
+        padding: 1.05rem 1rem 1.15rem;
+    }
+
+    .sectionNextEvents_cardPrice{
+        top: -192px;
+        left: 0.85rem;
+    }
 }
