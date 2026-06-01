@@ -1,5 +1,6 @@
 
 import './homepage.css'
+import { Link } from 'react-router-dom'
 
 export default function Homepage() {
     return (
@@ -16,7 +17,7 @@ export default function Homepage() {
                     <p className='videoHero__text2'>la buena vida</p>
                 </div>
                 <div className='videoHero__overlay3'>
-                    <a href="#" className='videoHero__button videoHero__button--primary'>Próximos Conciertos</a>
+                    <Link to='/event' className='videoHero__button videoHero__button--primary'>Próximos Conciertos</Link>
                     <a href="#" className='videoHero__button'>RESERVA</a>
                 </div>
             </div>
@@ -141,17 +142,42 @@ export default function Homepage() {
             </div>
 
             <div className='sectionMusicParty'>
+                <img className='sectionMusicParty_image' src="/Container-4.png" alt="Música en Directo" />
                 <div className='sectionMusicParty_columna1'>
                     <div className='sectionMusicParty_subTitle'>
                         <p style={{color: 'var(--color-primary)'}}>Música en Directo</p>
                     </div>
                     <h1 className='sectionMusicParty_title'>
-                        <p style={{ color: 'var(--color-surface)' }}>Conciertos que hacen vibrar,</p>
-                        <p className='italic-p' style={{ color: 'var(--color-yellow-text)' }}>tus noches en Mojácar</p>
+                        <p style={{ color: 'var(--color-surface)' }}>La noche empieza,</p>
+                        <p className='italic-p' style={{ color: 'var(--color-bg)' }}>aquí</p>
                     </h1>
-                    
+                    <div className='sectionMusicParty_content'>
+                        <p>Cada semana, los mejores grupos de la escena nacional e internacional llenan El CiD de música. Flamenco, rock, jazz, reggae, soul… Hay vida más allá del atardecer.</p>
+                    </div>
+                    <div className='sectionMusicParty_button'>
+                        <a href="#" className='sectionMusicParty_button--primary'>Ver Próximos Conciertos</a>
+                    </div>
                 </div>
             </div>
+            <div className='sectionContactInformation'>
+                <div className='sectionContactInformation_columna1'>
+                    <div className='sectionContactInformation_subTitle'>
+                        <p style={{color: 'var(--color-primary)'}}>Reservas</p>
+                    </div>
+                    <h1 className='sectionContactInformation_title'>
+                        ¿Vienes a vernos?
+                    </h1>
+                    <div className='sectionContactInformation_content'>
+                        <p>Para reservar mesa o para grupos, llámanos o escríbenos. Estaremos encantados de prepararlo todo para que tu visita sea perfecta.</p>
+                    </div>
+                    <div className='sectionContactInformation_button'>
+                        <a href="#" className='sectionContactInformation_button--primary' style={{ backgroundColor: 'var(--color-primary)' }}>+34 950 000 000</a>
+                        <a href="#" className='sectionContactInformation_button--secondary'>Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+           
 
         </section>
         
