@@ -45,26 +45,29 @@ export default function AdminLogin() {
           <p className="mt-2 text-sm text-slate-600">Entra con tu cuenta de administrador para gestionar el panel.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-slate-700">Email</span>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <label className="flex items-center">
+            <span className="w-24 text-sm font-medium text-slate-700">
+              Email
+            </span>
+
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@correo.com"
               type="email"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-[#876f42]"
+              className="ml-6 w-full rounded-xl border border-slate-300 bg-white px-4 py-3"
             />
           </label>
 
-          <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-slate-700">Password</span>
+          <label className="flex items-center">
+            <span className="w-24 text-sm font-medium text-slate-700">Password</span>
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Tu contraseña"
               type="password"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-[#876f42]"
+              className="ml-6 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-[#876f42]"
             />
           </label>
 

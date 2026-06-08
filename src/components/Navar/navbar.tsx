@@ -23,7 +23,7 @@ export default function Navbar() {
 
         <nav className={`navbar__menu ${menuOpen ? 'navbar__menu--open' : ''}`}>
           <a className="navbar__link "  style={{ color: 'black' }} href="/homepage">INICIO</a>
-          <a className="navbar__link" href="#">CONCIERTOS</a>
+          <a className="navbar__link" href="/event ">CONCIERTOS</a>
           <a className="navbar__link navbar__link--highlight" href="/reservas">RESERVAS</a>
         </nav>
       </div>

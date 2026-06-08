@@ -196,16 +196,22 @@ export default function AdminDashboard() {
     setShowCreateForm(true);
   }
 
-  async function handleDeleteEvent(event: EventItem) {
-    if (!event.docId) return;
+async function handleDeleteEvent(event: EventItem) {
+  if (!event.docId) return;
 
-    try {
-      await deleteDoc(doc(db, "Event", event.docId));
-      setEvents((current) => current.filter((item) => item.docId !== event.docId));
-    } catch (err: any) {
-      setError(err?.message || "No se pudo eliminar el evento.");
-    }
+  const confirmed = window.confirm(
+    `¿Seguro que quieres eliminar, esto no se puede deshacer "${event.title}"?`
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await deleteDoc(doc(db, "Event", event.docId));
+    setEvents((current) => current.filter((item) => item.docId !== event.docId));
+  } catch (err: any) {
+    setError(err?.message || "No se pudo eliminar el evento.");
   }
+}
 
   async function handleCreateEvent(e: React.FormEvent) {
     e.preventDefault();

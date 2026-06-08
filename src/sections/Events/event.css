@@ -47,10 +47,10 @@
     text-transform: uppercase;
     font-family: var(--font-basic);
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    text-align: left;
+    text-align: center;
 
 }
 
@@ -229,6 +229,54 @@
 
 .sectionNextEvents_cardMeta span:last-child{
     margin-left: auto;
+}
+
+
+.sectionSubscribeInformation{
+    height: 40vh;
+    color: var(--color-bg);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--color-primary);
+
+}
+
+.sectionSubscribeInformation_columna1{
+    width: min(100%, 1200px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sectionSubscribeInformation_button--primary{
+    background-color: var(--color-yellow-text);
+    color: var(--color-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    width: 200px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: var(--font-basic);
+    text-transform: uppercase;
+    
+}
+
+.sectionSubscribeInformation_input{
+    background-color: var(--color-bg);
+    height: 3.5rem;
+    margin-right: 1rem;
+    width: 350px;
+    color: var(--color-black);
 }
 
 @media (max-width: 768px){

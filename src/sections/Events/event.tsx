@@ -146,6 +146,25 @@ export default function Events() {
                 </div>
             </div>
 
+             <div className='sectionSubscribeInformation'>
+                <div className='sectionSubscribeInformation_columna1'>
+                    <div className='sectionSubscribeInformation_subTitle'>
+                        <p style={{color: 'var(--color-primary)'}}>Newsletter</p>
+                    </div>
+                    <h1 className='sectionSubscribeInformation_title'>
+                        No te pierdas ningún concierto
+                    </h1>
+                    <div className='sectionSubscribeInformation_content'>
+                        <p>Síguenos en redes sociales o escríbenos para recibir la agenda en tu correo.</p>
+                    </div>
+                    <div className='sectionSubscribeInformation_button'>
+                        <input type="email" placeholder="Tu correo electrónico" className='sectionSubscribeInformation_input' />
+                        <a href="#" className='sectionSubscribeInformation_button--primary'>Suscribirse</a>
+                    </div>
+                </div>
+            </div>
+
+
         </section>
     )
 }
