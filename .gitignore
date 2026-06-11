@@ -29,4 +29,6 @@ tsconfig.*.json
 eslint*
 package-lock.json
 package.json
+firebase.ts
+.gitignore
 .env*
