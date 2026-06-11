@@ -1,0 +1,81 @@
+.menuPage {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 4rem 1.25rem 5rem;
+}
+
+.menuPage__hero {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.menuPage__kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+}
+
+.menuPage__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.95;
+  color: var(--color-text);
+}
+
+.menuPage__subtitle {
+  max-width: 56ch;
+  color: var(--color-secondary);
+  font-family: var(--font-basic);
+}
+
+.menuPage__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.menuPage__card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
+}
+
+.menuPage__cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+  color: var(--color-text);
+}
+
+.menuPage__cardDescription {
+  color: var(--color-secondary);
+  line-height: 1.6;
+}
+
+.menuPage__price {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .menuPage {
+    padding-top: 3rem;
+  }
+
+  .menuPage__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menuPage__card {
+    flex-direction: column;
+  }
+}

@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Homepage from './sections/Homepage/homepage'
 import Layout from './components/Layout'
 import Events from './sections/Events/event.tsx'
+import Menu from './sections/Menu/menu'
 import AdminLog from "./sections/AdminLog/adminlog.tsx";
 import RequireAdmin from "./components/Admin/requireAdmin";
 import AdminLayout from "./components/Admin/adminLayout";
-import AdminDashboard from "./components/Admin/dashboard";
+import AdminDashboard from "./components/Admin/dashboard.tsx";
 import Reservas from './sections/Reservas/reserva.tsx'
 
 
@@ -17,6 +18,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/event" element={<Events />} />
+          <Route path="/menu" element={<Menu />} />
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/reservas" element={<Reservas />} />
         </Route>

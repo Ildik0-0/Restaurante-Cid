@@ -1,8 +1,44 @@
 
+import { useEffect } from 'react'
 import './homepage.css'
 import { Link } from 'react-router-dom'
 
 export default function Homepage() {
+    useEffect(() => {
+        const revealEls = Array.from(document.querySelectorAll('.reveal-on-scroll')) as HTMLElement[]
+
+        let lastY = window.scrollY
+        let scrollingDown = false
+        const onScroll = () => {
+            const y = window.scrollY
+            scrollingDown = y > lastY
+            lastY = y
+        }
+        window.addEventListener('scroll', onScroll, { passive: true })
+
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && scrollingDown) {
+                        entry.target.classList.add('is-visible')
+                        revealObserver.unobserve(entry.target)
+                    }
+                })
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+        )
+
+        revealEls.forEach((el, i) => {
+            el.style.transitionDelay = `${i * 60}ms`
+            revealObserver.observe(el)
+        })
+
+        return () => {
+            revealObserver.disconnect()
+            window.removeEventListener('scroll', onScroll)
+        }
+    }, [])
+
     return (
         <section className="homepage">
             <div className='videoHero'>
@@ -20,14 +56,26 @@ export default function Homepage() {
                     <Link to='/event' className='videoHero__button videoHero__button--primary'>Próximos Conciertos</Link>
                     <a href="#" className='videoHero__button'>RESERVA</a>
                 </div>
+
+                <button
+                    type="button"
+                    aria-label="Ir a la siguiente sección"
+                    className="videoHero__scrollArrow"
+                    onClick={() => document.getElementById('next-section')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                        <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                </button>
             </div>
 
-            <div className='infoSection'>
+            <div className='infoSection reveal-on-scroll'>
                 <p>
                     En la orilla del Mediterráneo, donde la arena cede paso al mar, nació El CiD. Un lugar donde el tiempo se detiene, la comida sabe a Almería y la música llena el alma. Bienvenido a la buena vida.
                 </p>
             </div>
-            <div className='infoSection2'>
+
+            <div className='infoSection2 reveal-on-scroll'>
                 <ul className='infoSection2__list'>
                     <li className='infoSection2__item'>
                         <img className='infoSection2__icon' src="/Icon.png" alt="Terraza en la Playa" />
@@ -48,8 +96,8 @@ export default function Homepage() {
                 </ul>
             </div>
 
-            <div className='sectionInformation'>
-                <div className='sectionInformation_column1'>
+            <div id='next-section' className='sectionInformation reveal-on-scroll'>
+                <div className='sectionInformation_column1 reveal-on-scroll'>
                     <div className='sectionInformation_subTitle'>
                         <p>La Playa</p>
                     </div>
@@ -63,22 +111,22 @@ export default function Homepage() {
                         <p>Ven a disfrutar de la calma del Mediterráneo, con los pies en la arena y una bebida fría en la mano. Así es la buena vida.</p>
                     </div>
                 </div>
-                <div className='sectionInformation_column2'>
+                <div className='sectionInformation_column2 reveal-on-scroll'>
                     <div className='sectionInformation_image'>
                         <img src="/Container-2.png" alt="Vista de la Playa" />
                     </div>
                 </div>
             </div>
 
-            <div className='sectionCosinaInformation'>
-                <div className='sectionCosinaInformation_columna1'>
+            <div className='sectionCosinaInformation reveal-on-scroll'>
+                <div className='sectionCosinaInformation_columna1 reveal-on-scroll'>
                     <div className='sectionCosinaInformation_image'>
                         <img className='sectionCosinaInformation_image--primary' src="/cocina.png" alt="Plato de Comida" />
                         <img className='sectionCosinaInformation_image--secondary' src="/cocina2.png" alt="Plato de Comida" />
                     </div>
                 </div>
-                
-                <div className='sectionCosinaInformation_columna2'>
+
+                <div className='sectionCosinaInformation_columna2 reveal-on-scroll'>
                     <div className='sectionCosinaInformation_subTitle'>
                         <p>Nuestra Cocina</p>
                     </div>
@@ -87,7 +135,7 @@ export default function Homepage() {
                         <p className='italic-p'>a mar y sol</p>
                     </h1>
                     <div className='sectionCosinaInformation_content --font-basic'>
-                        <p >En El CiD elaboramos nuestras paellas con productos frescos de la huerta almeriense y el mejor marisco de la costa. Cada arroz es una celebración de los sabores del Mediterráneo.</p>
+                        <p>En El CiD elaboramos nuestras paellas con productos frescos de la huerta almeriense y el mejor marisco de la costa. Cada arroz es una celebración de los sabores del Mediterráneo.</p>
 
                         <p>Las paellas se preparan al momento, con el cariño y la tradición que se merece un plato así. También ofrecemos una completa carta de tapas, pescados a la plancha y postres caseros.</p>
                     </div>
@@ -99,7 +147,7 @@ export default function Homepage() {
             </div>
 
             <div className='sectionBeerInformation'>
-              
+
                 <div className='sectionBeerInformation_columna1'>
                     <div className='sectionBeerInformation_subTitle'>
                         <p style={{color: 'var(--color-primary)'}}>El Cañero</p>
@@ -113,7 +161,7 @@ export default function Homepage() {
 
                         <p>Además de cerveza de grifo, disponemos de una amplia selección de vinos de la tierra, cócteles de temporada, refrescos y la mejor sangría de Mojácar.</p>
                     </div>
-                    
+
                     <div className='sectionBeerInformation_subContent'>
                         <ul className='sectionBeerInformation_subContent_list'>
                             <li className='sectionBeerInformation_subContent_item'>
@@ -133,7 +181,7 @@ export default function Homepage() {
                     </div>
 
                 </div>
-                  <div className='sectionBeerInformation_columna2'>
+                <div className='sectionBeerInformation_columna2'>
                     <div className='sectionBeerInformation_image'>
                         <img src="/beer.png" alt="Cerveza Fría" />
                     </div>
@@ -141,9 +189,9 @@ export default function Homepage() {
 
             </div>
 
-            <div className='sectionMusicParty'>
+            <div className='sectionMusicParty reveal-on-scroll'>
                 <img className='sectionMusicParty_image' src="/Container-4.png" alt="Música en Directo" />
-                <div className='sectionMusicParty_columna1'>
+                <div className='sectionMusicParty_columna1 reveal-on-scroll'>
                     <div className='sectionMusicParty_subTitle'>
                         <p style={{color: 'var(--color-primary)'}}>Música en Directo</p>
                     </div>
@@ -160,7 +208,7 @@ export default function Homepage() {
                 </div>
             </div>
             <div className='sectionContactInformation'>
-                <div className='sectionContactInformation_columna1'>
+                <div className='sectionContactInformation_columna1 reveal-on-scroll'>
                     <div className='sectionContactInformation_subTitle'>
                         <p style={{color: 'var(--color-primary)'}}>Reservas</p>
                     </div>
@@ -177,10 +225,6 @@ export default function Homepage() {
                 </div>
             </div>
 
-           
-           
-
         </section>
-        
     )
 }

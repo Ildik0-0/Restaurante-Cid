@@ -1,7 +1,50 @@
 import { useState } from 'react'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 import { db } from '../../data/firebase'
+import { addHours, overlaps, parseReservationDateTime, reservationTables } from '../../data/reservationTables'
 import './reserva.css'
+
+async function assignTableForReservation(date: string, time: string, guests: number) {
+    const reservationSnapshot = await getDocs(collection(db, 'Reservas'))
+
+    const reservationStart = parseReservationDateTime(date, time)
+
+    if (!reservationStart) {
+        throw new Error('La fecha o la hora no son válidas.')
+    }
+
+    const reservationEnd = addHours(reservationStart, 2)
+    const candidates = reservationTables
+        .filter((table) => table.capacity >= guests)
+        .sort((left, right) => left.capacity - right.capacity || Number(left.name.split(' ')[1]) - Number(right.name.split(' ')[1]))
+
+    if (candidates.length === 0) {
+        throw new Error('No hay una mesa adecuada para ese número de personas.')
+    }
+
+    const existingReservations = reservationSnapshot.docs.map((document) => document.data() as { mesa?: string; date?: string; time?: string; status?: string; endsAt?: string })
+
+    const availableTable = candidates.find((table) => {
+        return existingReservations.every((reservation) => {
+            if (reservation.status === 'cancelada') return true
+            if (reservation.mesa !== table.name || !reservation.date || !reservation.time) return true
+
+            const existingStart = parseReservationDateTime(reservation.date, reservation.time)
+            if (!existingStart) return true
+
+            const existingEnd = reservation.endsAt ? new Date(reservation.endsAt) : addHours(existingStart, 2)
+            if (Number.isNaN(existingEnd.getTime())) return true
+
+            return !overlaps(reservationStart, reservationEnd, existingStart, existingEnd)
+        })
+    })
+
+    if (!availableTable) {
+        throw new Error('No hay mesas disponibles para esa fecha y hora. Prueba con otro horario.')
+    }
+
+    return { tableName: availableTable.name, reservationStart, reservationEnd }
+}
 
 export default function Reservas() {
     const [sending, setSending] = useState(false)
@@ -31,18 +74,29 @@ export default function Reservas() {
             setError('')
             setMessage('')
 
+            const guestsCount = Number(guests)
+            if (Number.isNaN(guestsCount) || guestsCount <= 0) {
+                throw new Error('El número de personas no es válido.')
+            }
+
+            const assignedTable = await assignTableForReservation(date, time, guestsCount)
+
             await addDoc(collection(db, 'Reservas'), {
                 name,
                 email,
+                mesa: assignedTable.tableName,
                 date,
                 time,
-                guests: Number(guests),
+                guests: guestsCount,
                 notes,
                 status: 'pendiente',
                 createdAt: new Date().toISOString(),
+                startsAt: assignedTable.reservationStart.toISOString(),
+                endsAt: assignedTable.reservationEnd.toISOString(),
+                durationMinutes: 120,
             })
 
-            setMessage('Reserva enviada correctamente. Nos pondremos en contacto contigo pronto.')
+            setMessage(`Reserva enviada correctamente. Se asignó ${assignedTable.tableName} para 2 horas.`)
             form.reset()
         } catch (err: any) {
             setError(err?.message || 'No se pudo enviar la reserva.')
@@ -66,7 +120,7 @@ export default function Reservas() {
                     <p className="reservas-card-label">Detalles de la reserva</p>
                     <h2 className="reservas-card-title">Todo listo en unos segundos</h2>
                     <p className="reservas-card-text">
-                        Elige fecha, hora y número de personas. Si necesitas indicar algo especial, añádelo en el mensaje.
+                        La mesa se asigna automáticamente según el número de personas y queda reservada por un máximo de 2 horas.
                     </p>
 
                     <ul className="reservas-list">

@@ -3,6 +3,16 @@
   padding: 1rem;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  transition: background-color 360ms ease, border-color 360ms ease, color 360ms ease;
+}
+
+.navbar.scrolled {
+  /* keep original background/color to avoid layout/color shifts */
+  background: var(--color-bg);
+  border-bottom-color: var(--color-border);
 }
 
 .navbar__container {
