@@ -1,4 +1,6 @@
 import './footer.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInstagram, faFacebookF } from '@fortawesome/free-brands-svg-icons'
 
 export default function Footer() {
     return (
@@ -42,6 +44,14 @@ export default function Footer() {
                     <div className='sectionFooterInformation_content3_phone'>
                         <img className='icon' src="/phone.png" alt="Icon" />
                         <p> +34 950 000 000</p>
+                    </div>
+                    <div className='sectionFooterInformation_content3_emojis' aria-label="Redes sociales">
+                        <a href="#" aria-label="Instagram" className='social-link'>
+                            <FontAwesomeIcon icon={faInstagram} />
+                        </a>
+                        <a href="#" aria-label="Facebook" className='social-link'>
+                            <FontAwesomeIcon icon={faFacebookF} />
+                        </a>
                     </div>
                 </div>
             </div>
